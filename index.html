@@ -326,7 +326,7 @@
       return result;
     }
     function loadGCode(content) {
-      const worker = new Worker('./verylitegcodeviewer.js');
+      const worker = new Worker('./gcview.js');
 
 
       worker.onmessage = (e) => {

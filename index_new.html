@@ -11,29 +11,10 @@
     body {
       overflow-x: hidden;
     }
-    .sidebar {
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 220px;
-      background-color: #343a40;
-      padding-top: 56px;
-      color: white;
-    }
-    .sidebar a {
-      color: white;
-      display: block;
-      padding: 10px 20px;
-      text-decoration: none;
-    }
-    .sidebar a:hover {
-      background-color: #495057;
-    }
     .main-content {
-      margin-left: 220px;
-      padding: 1rem;
-      padding-top: 70px;
+      margin: 0;
+      padding: 0;
+      padding-top: 56px;
     }
     .grid {
       display: flex;
@@ -41,8 +22,8 @@
       position: relative;
     }
     .grid-item {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 50px;
       cursor: move;
       /* box-sizing: border-box; */
       border: 1px solid #ccc;
@@ -55,32 +36,41 @@
     }
 
     .grid-item.wide-2 {
-      width: 200px;
+      width: 160px;
     }
     .grid-item.wide-3 {
-      width: 300px;
+      width: 240px;
     }
     .grid-item.wide-4 {
-      width: 400px;
+      width: 320px;
     }
 
     .grid-item.high-2 {
-      height: 200px;
+      height: 100px;
     }
     .grid-item.high-3 {
-      height: 300px;
+      height: 150px;
     }
     .grid-item.high-4 {
-      height: 400px;
+      height: 200px;
     }
     .grid-item.high-5 {
-      height: 500px;
+      height: 250px;
     }
     .grid-item.high-6 {
-      height: 600px;
+      height: 300px;
     }
     .grid-item.high-7 {
-      height: 700px;
+      height: 350px;
+    }
+    .grid-item.high-8 {
+      height: 400px;
+    }
+    .grid-item.high-9 {
+      height: 450px;
+    }
+    .grid-item.high-10 {
+      height: 500px;
     }
 
     .card {
@@ -98,14 +88,26 @@
     }
 
     .btn-jogrose {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
     }
 
     .btn-jogsize {
       font-size: 0.8em;
-      width: 60px;
+      width: 50px;
       height: 30px;
+    }
+
+    .btn-tool {
+      font-size: 0.8em;
+      width: 46px;
+      height: 40px;
+    }
+
+    .btn-coolant {
+      font-size: 0.8em;
+      width: 46px;
+      height: 40px;
     }
 
     /* Sliders */
@@ -129,6 +131,12 @@
       background: #888;
     }
 
+    .form-range {
+      height: 1rem;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
 
     /* end slider */
 
@@ -136,10 +144,14 @@
   </style>
 </head>
 <body>
+
+
   <!-- Navbar -->
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">GRBL Control</a>
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="/logo.svg" alt="Logo" height="30" class="me-2">
+      </a>
       <div class="d-flex">
         <div class="dropdown">
           <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
@@ -156,24 +168,18 @@
     </div>
   </nav>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <a href="#">Menu 1</a>
-    <a href="#">Menu 2</a>
-    <a href="#">Firmware Tools</a>
-    <a href="#">GRBL Settings</a>
-  </div>
+
 
   <!-- Main content -->
   <div class="main-content">
     <div class="grid" id="packery-grid">
 
-      <div class="grid-item wide-2 high-3">
-        <div class="row g-1 mt-0">
+      <div class="grid-item wide-2 high-5">
+        <div class="row g-0 mt-0">
           <div class="col-12">
             <div class="d-flex align-items-center justify-content-between me-1 ms-1">
               <div class="border border-danger bg-white p-1 m-1 rounded shadow-sm flex-grow-1 d-flex justify-content-between align-items-center">
-                <span class="text-muted">X</span>
+                <span class="text-danger">X</span>
                 <span class="fw-bold text-danger">9999.999</span>
               </div>
               <button class="btn btn-sm btn-outline-danger me-1" title="Set Zero">
@@ -184,7 +190,7 @@
           <div class="col-12">
             <div class="d-flex align-items-center justify-content-between me-1 ms-1">
               <div class="border border-success bg-white p-1 m-1 rounded shadow-sm flex-grow-1 d-flex justify-content-between align-items-center">
-                <span class="text-muted">Y</span>
+                <span class="text-success">Y</span>
                 <span class="fw-bold text-success">9999.999</span>
               </div>
               <button class="btn btn-sm btn-outline-success me-1" title="Set Zero">
@@ -195,7 +201,7 @@
           <div class="col-12">
             <div class="d-flex align-items-center justify-content-between me-1 ms-1">
               <div class="border border-primary bg-white p-1 m-1 rounded shadow-sm flex-grow-1 d-flex justify-content-between align-items-center">
-                <span class="text-muted">Z</span>
+                <span class="text-primary">Z</span>
                 <span class="fw-bold text-primary">9999.999</span>
               </div>
               <button class="btn btn-sm btn-outline-primary me-1" title="Set Zero">
@@ -206,7 +212,7 @@
           <div class="col-12">
             <div class="d-flex align-items-center justify-content-between m-0 me-1 ms-1">
               <div class="border border-warning bg-white p-1 m-1 rounded shadow-sm flex-grow-1 d-flex justify-content-between align-items-center">
-                <span class="text-muted">A</span>
+                <span class="text-warning">A</span>
                 <span class="fw-bold text-warning">9999.999</span>
               </div>
               <button class="btn btn-sm btn-outline-warning me-1" title="Set Zero">
@@ -218,7 +224,7 @@
           <div class="col-12">
             <div class="d-flex align-items-center justify-content-between m-0 me-1 ms-1">
               <div class="border border-secondary bg-white p-1 m-1 rounded shadow-sm flex-grow-1 d-flex justify-content-between align-items-center">
-                <span class="text-muted">F</span>
+                <span class="text-secondary">F</span>
                 <span class="fw-bold text-secondary">9999.999</span>
               </div>
             </div>
@@ -226,7 +232,7 @@
           <div class="col-12">
             <div class="d-flex align-items-center justify-content-between m-0 me-1 ms-1">
               <div class="border border-info bg-white p-1 m-1 rounded shadow-sm flex-grow-1 d-flex justify-content-between align-items-center">
-                <span class="text-muted">S</span>
+                <span class="text-info">S</span>
                 <span class="fw-bold text-info">9999.999</span>
               </div>
             </div>
@@ -238,31 +244,31 @@
 
 
 
-      <div class="grid-item wide-4 high-3">
-        <div class="container text-center">
+      <div class="grid-item wide-4 high-5">
+        <div class="container text-center m-0 p-0">
           <!-- TOP ROW -->
           <div class="row justify-content-center">
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-secondary btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-up fa-rotate-by" style="--fa-rotate-angle: -45deg;"></i>
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-danger btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-up"></i>
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-secondary btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-up fa-rotate-by" style="--fa-rotate-angle: 45deg;"></i>
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-primary btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-up"></i><br>Z+
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-warning btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-up"></i><br>A+
               </button>
@@ -271,48 +277,48 @@
 
           <!-- MIDDLE ROW -->
           <div class="row justify-content-center mt-2">
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-success btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-left"></i>
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-danger btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-times"></i>
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-success btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-right"></i>
               </button>
             </div>
-            <div class="col-2"></div>
-            <div class="col-2"></div>
+            <div class="col-2 m-0 p-0"></div>
+            <div class="col-2 m-0 p-0"></div>
           </div>
 
           <!-- BOTTOM ROW -->
           <div class="row justify-content-center mt-2">
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-secondary btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-down fa-rotate-by" style="--fa-rotate-angle: 45deg;"></i>
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-danger btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-down"></i>
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-secondary btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-down fa-rotate-by" style="--fa-rotate-angle: -45deg;"></i>
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-primary btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-down"></i><br>Z-
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-warning btn-jogrose p-0 shadow-sm">
                 <i class="fas fa-arrow-down"></i><br>A-
               </button>
@@ -321,27 +327,27 @@
 
           <!-- STEP SIZE ROW -->
           <div class="row justify-content-center mt-4">
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-secondary btn-jogsize p-0 shadow-sm">
                 0.01mm
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-secondary btn-jogsize p-0 shadow-sm">
                 0.1mm
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-secondary btn-jogsize p-0 shadow-sm">
                 1mm
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-secondary btn-jogsize p-0 shadow-sm">
                 10mm
               </button>
             </div>
-            <div class="col-2">
+            <div class="col-2 m-0 p-0">
               <button class="btn btn-outline-secondary btn-jogsize p-0 shadow-sm">
                 100mm
               </button>
@@ -351,22 +357,84 @@
         </div>
       </div>
 
-      <div class="grid-item wide-3 high-3">
-        <div class="d-flex flex-column p-2">
-          <div class="mb-2">
-            <label for="customRange1" class="form-label">Override Jog Speed</label>
-            <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange1">
+      <div class="grid-item wide-2 high-1">
+        <div class="row p-1">
+          <div class="col-4 d-flex flex-column justify-content-between">
+            <div class="d-flex align-items-center small">Jog</div>
           </div>
-          <div class="mb-2">
-            <label for="customRange2" class="form-label">Override Tool RPM/Power</label>
-            <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange2">
-          </div>
-          <div class="mb-2">
-            <label for="customRange3" class="form-label">Override Travel Speed</label>
-            <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+          <div class="col-8 d-flex flex-column justify-content-between">
+            <input type="range" class="form-range" min="0" max="5" step="0.5" id="rangeJog">
           </div>
         </div>
       </div>
+
+      <div class="grid-item wide-2 high-1">
+        <div class="row p-1">
+          <div class="col-4 d-flex flex-column justify-content-between">
+            <div class="d-flex align-items-center small">Feed</div>
+          </div>
+          <div class="col-8 d-flex flex-column justify-content-between">
+              <input type="range" class="form-range" min="0" max="5" step="0.5" id="rangeFeed">
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-item wide-2 high-1">
+        <div class="row p-1">
+          <div class="col-4 d-flex flex-column justify-content-between">
+            <div class="d-flex align-items-center small">Tool</div>
+          </div>
+          <div class="col-8 d-flex flex-column justify-content-between">
+              <input type="range" class="form-range" min="0" max="5" step="0.5" id="rangeTool">
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-item wide-2 high-1">
+        <div class="container text-center m-0 pe-3 ps-3">
+          <div class="row justify-content-around">
+            <div class="col-4 m-0 p-0">
+              <button class="btn btn-outline-info btn-coolant p-0 shadow-sm">
+                Mist<br>M7
+              </button>
+            </div>
+            <div class="col-4 m-0 p-0">
+              <button class="btn btn-outline-primary btn-coolant p-0 shadow-sm">
+                Flood<br>M8
+              </button>
+            </div>
+            <div class="col-4 m-0 p-0">
+              <button class="btn btn-outline-secondary btn-coolant p-0 shadow-sm">
+                OFF<br>M9
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="grid-item wide-2 high-1">
+        <div class="container text-center m-0 pe-3 ps-3">
+          <div class="row justify-content-around">
+            <div class="col-4 m-0 p-0">
+              <button class="btn btn-outline-success btn-tool p-0 shadow-sm">
+                FWD<br>M3
+              </button>
+            </div>
+            <div class="col-4 m-0 p-0">
+              <button class="btn btn-outline-warning btn-tool p-0 shadow-sm">
+                REV<br>M4
+              </button>
+            </div>
+            <div class="col-4 m-0 p-0">
+              <button class="btn btn-outline-danger btn-tool p-0 shadow-sm">
+                OFF<br>M5
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
 
 
@@ -398,7 +466,7 @@
     const grid = document.querySelector('#packery-grid');
     const pckry = new Packery(grid, {
       itemSelector: '.grid-item',
-      columnWidth: 100,
+      columnWidth: 80,
       gutter: 0
     });
 
