@@ -1,0 +1,9 @@
+.navbar .dropdown-menu .form-check-input:checked {
+  background-color: #6c757d; /* Bootstrap gray-600 */
+  border-color: #6c757d;
+}
+
+.navbar .dropdown-menu .form-check-input:focus {
+  box-shadow: none;
+  border-color: #6c757d;
+}
