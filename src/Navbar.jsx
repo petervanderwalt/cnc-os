@@ -44,7 +44,7 @@ export default function Navbar({ modules, visibleModules, onToggle }) {
               >
                 <i className="fas fa-layer-group me-1"></i>Modules
               </a>
-              <ul className="dropdown-menu" style={{ minWidth: 220 }}>
+              <ul className="dropdown-menu shadow" style={{ minWidth: 220 }}>
                 <li>
                   <h6 className="dropdown-header">
                     <i className="fas fa-eye-slash me-1"></i>Show/Hide Modules

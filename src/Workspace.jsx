@@ -105,7 +105,7 @@ export default function Workspace({ modules, visibleModules }) {
         <div
           key={mod.id}
           id={`module_${mod.id}`}
-          className="module-card"
+          className="module-card shadow"
           style={{
             transform: `translate(${mod.x}px, ${mod.y}px)`,
             width: mod.width,
@@ -119,7 +119,6 @@ export default function Workspace({ modules, visibleModules }) {
           <div className="module-body">
             <mod.Component />
           </div>
-          {mod.allowResize && <div className="resize-handle" />}
         </div>
       ))}
     </div>
