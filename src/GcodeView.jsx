@@ -1,4 +1,4 @@
-export const width = 600;
+export const width = 300;
 export const height = 600;
 export const displayName = "3D Viewer";
 export const allowResize = true;
@@ -8,10 +8,10 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, OrthographicCamera, GizmoHelper } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
-import GCodeRenderer from '../utils/GCodeRenderer'; // New component you’ll make to load & render G-code
+import GCodeRenderer from './utils/GCodeRenderer'; // New component you’ll make to load & render G-code
 
-import { StaticGrid, AxisIndicator } from '../utils/GcodeViewScene';
-import { GcodeDecoration } from '../utils/GcodeDecoration';
+import { StaticGrid, AxisIndicator } from './utils/GcodeViewScene';
+import { GcodeDecoration } from './utils/GcodeDecoration';
 
 
 export default function GCodeView() {

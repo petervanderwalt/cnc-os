@@ -1,7 +1,4 @@
-export const width = 300;
-export const height = 300;
 export const displayName = "Digital Read Out";
-export const allowResize = false;
 
 export default function Dro() {
   return (
@@ -34,7 +31,7 @@ export default function Dro() {
               <span className="input-group-text dro-unit">{axis === 'a' ? 'deg' : 'mm'}</span>
             </div>
             <div className="ms-auto">
-              <button className="btn btn-sm btn-outline-dark dro-zero">Set 0</button>
+              <button className="btn btn-sm btn-outline-dark dro-zero me-1">Set 0</button>
               <button className="btn btn-sm btn-outline-dark dro-goto">Goto 0</button>
             </div>
           </div>

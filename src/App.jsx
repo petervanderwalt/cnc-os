@@ -16,9 +16,6 @@ const modules = Object.entries(moduleFiles).map(([path, mod]) => {
   return {
     id,
     name: mod.displayName || id,
-    width: mod.width || 0,
-    height: mod.height || 0,
-    allowResize: mod.allowResize || false,
     Component: mod.default,
   };
 });
@@ -30,15 +27,21 @@ function App() {
   const allModuleIds = modules.map((m) => m.id);
 
   // Load visible module IDs from localStorage or default to all
-  const [visibleModules, setVisibleModules] = useState(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : allModuleIds;
+  const [leftModules, setLeftModules] = useState(() => {
+    const stored = localStorage.getItem('leftModules');
+    return stored ? JSON.parse(stored) : modules.map(m => m.id); // all on left initially
+  });
+
+  const [rightModules, setRightModules] = useState(() => {
+    const stored = localStorage.getItem('rightModules');
+    return stored ? JSON.parse(stored) : [];
   });
 
   // Save to localStorage whenever visibleModules changes
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(visibleModules));
-  }, [visibleModules]);
+    localStorage.setItem('leftModules', JSON.stringify(leftModules));
+    localStorage.setItem('rightModules', JSON.stringify(rightModules));
+  }, [leftModules, rightModules]);
 
   const toggleModule = (id) => {
     setVisibleModules((prev) =>
@@ -53,8 +56,20 @@ function App() {
 
   return (
     <>
-      <Navbar modules={modules} visibleModules={visibleModules} onToggle={toggleModule} />
-      <Workspace modules={modules} visibleModules={visibleModules} />
+      <Navbar
+        modules={modules}
+        leftModules={leftModules}
+        rightModules={rightModules}
+        setLeftModules={setLeftModules}
+        setRightModules={setRightModules}
+      />
+      <Workspace
+        modules={modules}
+        leftModules={leftModules}
+        rightModules={rightModules}
+        setLeftModules={setLeftModules}
+        setRightModules={setRightModules}
+      />
     </>
   );
 }

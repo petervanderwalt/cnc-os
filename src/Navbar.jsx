@@ -4,7 +4,8 @@ import './Navbar.css';
 
 import logo from './assets/logo.svg'; // adjust path as needed
 
-export default function Navbar({ modules, visibleModules, onToggle }) {
+export default function Navbar({ modules, leftModules, rightModules, setLeftModules, setRightModules }) {
+
   return (
     <nav className="navbar navbar-expand-lg py-1 sticky-top border-bottom shadow-sm">
       <div className="container-fluid">
@@ -52,33 +53,51 @@ export default function Navbar({ modules, visibleModules, onToggle }) {
                 </li>
                 <li>
                   <ul className="list-unstyled px-2 mb-2">
-                    {modules.map((mod) => (
-                      <li key={mod.id}>
-                        <label
-                          className="dropdown-item d-flex align-items-center gap-2 ps-3"
-                          htmlFor={`chk_${mod.id}`}
-                        >
-                          <input
-                            className="form-check-input m-0 me-1"
-                            type="checkbox"
-                            id={`chk_${mod.id}`}
-                            checked={visibleModules.includes(mod.id)}
-                            onChange={() => onToggle(mod.id)}
-                          />
-                          {mod.name}
-                        </label>
-                      </li>
-                    ))}
+                    {modules.map((mod) => {
+                      const isLeft = leftModules.includes(mod.id);
+                      const isRight = rightModules.includes(mod.id);
+                      const current = isLeft ? 'left' : isRight ? 'right' : 'none';
+
+                      const handleChange = (e) => {
+                        const value = e.target.value;
+
+                        // Remove from both first
+                        setLeftModules(prev => prev.filter(id => id !== mod.id));
+                        setRightModules(prev => prev.filter(id => id !== mod.id));
+
+                        if (value === 'left') {
+                          setLeftModules(prev => [...prev, mod.id]);
+                        } else if (value === 'right') {
+                          setRightModules(prev => [...prev, mod.id]);
+                        }
+                      };
+
+                      return (
+                        <li key={mod.id}>
+                          <div className="dropdown-item d-flex align-items-center gap-2 ps-3">
+                            <span className="flex-grow-1">{mod.name}</span>
+                            <select
+                              className="form-select form-select-sm w-auto"
+                              value={current}
+                              onChange={handleChange}
+                            >
+                              <option value="none">Hidden</option>
+                              <option value="left">Left</option>
+                              <option value="right">Right</option>
+                            </select>
+
+                            </div>
+                        </li>
+
+                      );
+                    })}
+
                   </ul>
                 </li>
                 <li>
                   <hr className="dropdown-divider" />
                 </li>
-                <li>
-                  <button id="resetPositionsBtn" className="dropdown-item">
-                    <i className="fas fa-undo me-1"></i>Reset Positions to Defaults
-                  </button>
-                </li>
+
               </ul>
             </li>
             <li className="nav-item">
